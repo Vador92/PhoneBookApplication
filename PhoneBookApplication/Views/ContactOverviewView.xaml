@@ -1,0 +1,38 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" xmlns:customcontrols="clr-namespace:PhoneAppfinal.CustomControls"
+             x:Class="PhoneBookApplication.Views.ContactOverviewView">
+
+    <ContentPage.ToolbarItems>
+        <ToolbarItem  Text="Add New Contact" Clicked="OnAddClicked"/>
+    </ContentPage.ToolbarItems>
+    <Grid>
+        <customcontrols:InfiniteListView HasUnevenRows="True" 
+                                         ItemsSource="{Binding Contacts}"
+                                         x:Name="ContactsListView" 
+                                         ItemClickCommand="{Binding ContactSelectedCommand}">
+
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <ViewCell>
+                        <Grid>
+                            <Image Source="{Binding ProfilePicture}"/>
+                            <Label>
+                                <Label.FormattedText>
+                                    <FormattedString>
+                                        <Span Text="{Binding FirstName}"/>
+                                        <Span Text=" " />
+                                        <Span Text="{Binding LastName}"/>
+                                    </FormattedString>
+                                </Label.FormattedText>
+                            </Label>
+                            <Label Text="{Binding Email}"/>
+                            <Label Text="{Binding Address}"/>
+                        </Grid>
+                    </ViewCell>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </customcontrols:InfiniteListView>
+    </Grid>
+
+</ContentPage>
