@@ -83,20 +83,29 @@ namespace PhoneBookApplication.ViewModels
 
         }
 
+        public async void CreateContact()
+        {
+            Contact = new Models.Contact
+            {
+                Id = Guid.NewGuid(),
+                ProfilePicture = "https://www.nicepng.com/png/detail/933-9332131_profile-picture-default-png.png",
+                //FirstName = Contact.FirstName,
+                //LastName = Contact.LastName,
+                //Email = Contact.Email,
+                //Address = Contact.Address,
+            };
+            await App.Database.SaveContactAsync(Contact);
+        }
+
         private async void OnUpdateCommand()
         {
             if (Contact == null)
             {
+                CreateContact();
                 // Create a new contact object
-                Contact = new Models.Contact
-                {
-                    Id = Guid.NewGuid(),
-                    ProfilePicture = "https://www.nicepng.com/png/detail/933-9332131_profile-picture-default-png.png",
-                };
 
 
                 // Save the new contact
-                await App.Database.SaveContactAsync(Contact);
                 await App.Database.UpdateContactAsync(Contact);
 
                 // Assign the new contact to the Contact property
