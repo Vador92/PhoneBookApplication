@@ -1,40 +1,55 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
-             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:customcontrols1="clr-namespace:PhoneBookApplication.CustomControls"
              x:Class="PhoneBookApplication.Views.ContactOverviewView">
 
     <ContentPage.ToolbarItems>
-        <ToolbarItem  Text="Add New Contact" Command="{Binding AddCommand}"/>
+        <ToolbarItem Text="Add New Contact" Command="{Binding AddCommand}" />
     </ContentPage.ToolbarItems>
-    <Grid>
-        <customcontrols1:InfiniteListView HasUnevenRows="True" 
-                                         ItemsSource="{Binding Contacts}"
-                                         x:Name="ContactsListView" 
-                                         ItemClickCommand="{Binding ContactSelectedCommand}"
-                                          >
 
+    <Grid>
+        <customcontrols1:InfiniteListView HasUnevenRows="True"
+                                         ItemsSource="{Binding Contacts}"
+                                         x:Name="ContactsListView"
+                                         ItemClickCommand="{Binding ContactSelectedCommand}"
+                                         Margin="0,-10,0,0">>
             <ListView.ItemTemplate>
                 <DataTemplate>
                     <ViewCell>
                         <Grid>
-                            <Image Source="{Binding ProfilePicture}"/>
-                            <Label>
-                                <Label.FormattedText>
-                                    <FormattedString>
-                                        <Span Text="{Binding FirstName}"/>
-                                        <Span Text=" " />
-                                        <Span Text="{Binding LastName}"/>
-                                    </FormattedString>
-                                </Label.FormattedText>
-                            </Label>
-                            <Label Text="{Binding Email}"/>
-                            <Label Text="{Binding Address}"/>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto" />
+                                <!-- Profile Picture Column -->
+                                <ColumnDefinition Width="*" />
+                                <!-- Details Column -->
+                            </Grid.ColumnDefinitions>
+
+                            <Image Source="{Binding ProfilePicture}"
+                                   Grid.Column="0"
+                                   Aspect="AspectFill"
+                                   WidthRequest="100"
+                                   HeightRequest="100" />
+
+                            <StackLayout Grid.Column="1"
+                                         Padding="10"
+                                         VerticalOptions="Center">
+                                <Label>
+                                    <Label.FormattedText>
+                                        <FormattedString>
+                                            <Span Text="{Binding FirstName}" />
+                                            <Span Text=" " />
+                                            <Span Text="{Binding LastName}" />
+                                        </FormattedString>
+                                    </Label.FormattedText>
+                                </Label>
+                                <Label Text="{Binding Email}" />
+                                <Label Text="{Binding Address}" />
+                            </StackLayout>
                         </Grid>
                     </ViewCell>
                 </DataTemplate>
             </ListView.ItemTemplate>
         </customcontrols1:InfiniteListView>
     </Grid>
-
 </ContentPage>

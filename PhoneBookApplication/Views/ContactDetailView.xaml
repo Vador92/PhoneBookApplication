@@ -1,5 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8" ?>
-<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+﻿<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:viewModels="clr-namespace:PhoneBookApplication.ViewModels"
              x:Class="PhoneBookApplication.Views.ContactDetailView">
@@ -7,41 +6,115 @@
     <ContentPage.BindingContext>
         <viewModels:ContactDetailViewModel />
     </ContentPage.BindingContext>
-    
-    <StackLayout>
-        <Image x:Name="ProfilePicture"
+
+    <Grid VerticalOptions="FillAndExpand">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <!-- Profile Picture Row -->
+            <RowDefinition Height="Auto" />
+            <!-- Button Row -->
+            <RowDefinition Height="Auto" />
+            <!-- Entry Rows -->
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+
+        <Image x:Name="ProfilePictureEntry"
                Source="{Binding Contact.ProfilePicture}"
-               />
-        <Button Text="Choose Picture"
-                Command="{Binding ChooseCommand}"
-                />
-        <Button Text="Take Picture"
-                Command="{Binding TakeCommand}"
-                />
-        <Entry x:Name="FirstName"
-               Text="{Binding Contact.FirstName}"
-               Placeholder="John"
-        />
-        <Entry x:Name="LastName"
-               Text="{Binding Contact.LastName}"
-               Placeholder="Doe"
-        />
-        <Entry x:Name="Email"
-               Text="{Binding Contact.Email}"
-               Placeholder="johndoe@example.com"
-        />
-        <Entry x:Name="Address"
-               Text="{Binding Contact.Address}"
-               Placeholder="123 Main St"
-               
-        />
+               Grid.Row="0"
+               Aspect="AspectFit"
+               WidthRequest="200"
+               HeightRequest="200"
+               HorizontalOptions="Center" />
+
+        <StackLayout Orientation="Horizontal"
+                     Grid.Row="1"
+                     HorizontalOptions="Center">
+            <Button Text="Choose Picture"
+                    Command="{Binding ChooseCommand}"
+                    Margin="5" />
+            <Button Text="Take Picture"
+                    Command="{Binding TakeCommand}"
+                    Margin="5" />
+        </StackLayout>
+
+        <Grid Grid.Row="2" Margin="10">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+
+            <Label Text="First Name:"
+                   VerticalOptions="Center"
+                   VerticalTextAlignment="Center" />
+            <Entry x:Name="FirstNameEntry"
+                   Text="{Binding Contact.FirstName, Mode=TwoWay}"
+                   Placeholder="John"
+                   Grid.Column="1"
+                   Margin="10,0,0,0" />
+        </Grid>
+
+        <Grid Grid.Row="3" Margin="10">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+
+            <Label Text="Last Name:"
+                   VerticalOptions="Center"
+                   VerticalTextAlignment="Center" />
+            <Entry x:Name="LastNameEntry"
+                   Text="{Binding Contact.LastName, Mode=TwoWay}"
+                   Placeholder="Doe"
+                   Grid.Column="1"
+                   Margin="10,0,0,0" />
+        </Grid>
+
+        <Grid Grid.Row="4" Margin="10">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+
+            <Label Text="Email:"
+                   VerticalOptions="Center"
+                   VerticalTextAlignment="Center" />
+            <Entry x:Name="EmailEntry"
+                   Text="{Binding Contact.Email, Mode=TwoWay}"
+                   Placeholder="johndoe@example.com"
+                   Grid.Column="1"
+                   Margin="10,0,0,0" />
+        </Grid>
+
+        <Grid Grid.Row="5" Margin="10">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+
+            <Label Text="Address:"
+                   VerticalOptions="Center"
+                   VerticalTextAlignment="Center" />
+            <Entry x:Name="AddressEntry"
+                   Text="{Binding Contact.Address, Mode=TwoWay}"
+                   Placeholder="123 Main St"
+                   Grid.Column="1"
+                   Margin="10,0,0,0" />
+        </Grid>
+
         <Button Text="Update Contact"
                 Command="{Binding UpdateCommand}"
-            />
+                Grid.Row="6"
+                Margin="10,0,10,10" />
+
         <Button Text="Delete Contact"
                 Command="{Binding DeleteCommand}"
-                />
-    </StackLayout>
-    
-    
+                Grid.Row="7"
+                Margin="10,0,10,10" />
+    </Grid>
 </ContentPage>

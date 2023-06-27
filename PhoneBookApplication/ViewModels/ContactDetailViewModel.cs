@@ -12,13 +12,45 @@ using PhoneBookApplication.Views;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 using System.Runtime.CompilerServices;
-
+using System.Net.NetworkInformation;
+using System.Runtime.ExceptionServices;
 
 namespace PhoneBookApplication.ViewModels
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public class ContactDetailViewModel : BaseViewModel, INotifyPropertyChanged
     {
+
+        //code for setting the properties 
+        //private string _firstName;
+        //public string FirstNameEntry
+        //{
+        //    get { return _firstName; }
+        //    set { SetProperty(ref _firstName, value); }
+        //}
+
+        //private string _lastName;
+        //public string LastNameEntry
+        //{
+        //    get { return _lastName; }
+        //    set { SetProperty(ref _lastName, value); }
+        //}
+
+        //private string _email;
+        //public string EmailEntry
+        //{
+        //    get { return _email; }
+        //    set { SetProperty(ref _email, value); }
+        //}
+
+        //private string _address;
+        //public string AddressEntry
+        //{
+        //    get { return _address; }
+        //    set { SetProperty(ref _address, value); }
+        //}
+
+
         private Contact _contact;
 
         public Contact Contact
@@ -29,7 +61,9 @@ namespace PhoneBookApplication.ViewModels
 
         public void SetContact(Contact contact)
         {
+            
             Contact = contact;
+    
         }
 
         public ICommand UpdateCommand { get; set; }
@@ -53,43 +87,29 @@ namespace PhoneBookApplication.ViewModels
         {
             if (Contact == null)
             {
-                //await App.Database.SaveContactAsync
-                var newContact = new Models.Contact
+                // Create a new contact object
+                Contact = new Models.Contact
                 {
                     Id = Guid.NewGuid(),
-                    ProfilePicture = "https://tse2.mm.bing.net/th?id=OIP.sqXwVpmQneP_AsTdxn9khgHaEo&pid=Api&P=0&h=180",
-                    FirstName = string.Empty,
-                    LastName = string.Empty,
-                    Email = string.Empty,
-                    Address = string.Empty
+                    ProfilePicture = "https://www.nicepng.com/png/detail/933-9332131_profile-picture-default-png.png",
                 };
 
-                if (!string.IsNullOrWhiteSpace(newContact.FirstName)
-                && !string.IsNullOrWhiteSpace(newContact.LastName)
-                && !string.IsNullOrWhiteSpace(newContact.Email)
-                && !string.IsNullOrWhiteSpace(newContact.Address))
-                {
-                    
 
-                    newContact.FirstName = Contact.FirstName;
-                    newContact.LastName = Contact.LastName;
-                    newContact.Email = Contact.Email;
-                    newContact.Address = Contact.Address;
-                }
+                // Save the new contact
+                await App.Database.SaveContactAsync(Contact);
+                await App.Database.UpdateContactAsync(Contact);
 
-                await App.Database.SaveContactAsync(newContact);
-
-                Contact = newContact;
+                // Assign the new contact to the Contact property
             }
             else
             {
                 await App.Database.UpdateContactAsync(Contact);
-            }
+            }            
 
-            await App.Current.MainPage.Navigation.PopAsync() ;
+            await App.Current.MainPage.Navigation.PopAsync();
         }
 
-        private async void OnDeleteCommand()
+        public async void OnDeleteCommand()
         {
             if (Contact != null)
             {
