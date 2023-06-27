@@ -12,5 +12,6 @@ namespace PhoneBookApplication.Utilities
         = new ContactOverviewViewModel();
         public static ContactDetailViewModel ContactDetailViewModel{ get; set; } 
         = new ContactDetailViewModel();
+
     }
 }

@@ -44,6 +44,7 @@ namespace PhoneBookApplication.Models
             return _database.UpdateAsync(contact);
         }
 
+        //gets one contact based on id
         public Task<Contact> GetContactAsync(Guid id)
         {
             return _database.GetAsync<Contact>(id);

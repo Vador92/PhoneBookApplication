@@ -38,7 +38,6 @@ C:\Users\varun\Phonebookfinalapp\PhoneBookApplication\PhoneBookApplication.Andro
 C:\Users\varun\Phonebookfinalapp\PhoneBookApplication\PhoneBookApplication.Android\obj\Debug\130\lp\99\jl\files.cache
 C:\Users\varun\Phonebookfinalapp\PhoneBookApplication\PhoneBookApplication.Android\obj\Debug\130\lp\100\jl\files.cache
 C:\Users\varun\Phonebookfinalapp\PhoneBookApplication\PhoneBookApplication.Android\obj\Debug\130\lp\105\jl\files.cache
-C:\Users\varun\Phonebookfinalapp\PhoneBookApplication\PhoneBookApplication.Android\obj\Debug\130\R.txt
 C:\Users\varun\Phonebookfinalapp\PhoneBookApplication\PhoneBookApplication.Android\obj\Debug\130\R.cs.flag
 C:\Users\varun\Phonebookfinalapp\PhoneBookApplication\PhoneBookApplication.Android\obj\Debug\130\PhoneBookApplication.Android.csproj.CoreCompileInputs.cache
 C:\Users\varun\Phonebookfinalapp\PhoneBookApplication\PhoneBookApplication.Android\obj\Debug\130\PhoneBookApplication.Android.csproj.CopyComplete
@@ -62,6 +61,7 @@ C:\Users\varun\Phonebookfinalapp\PhoneBookApplication\PhoneBookApplication.Andro
 C:\Users\varun\Phonebookfinalapp\PhoneBookApplication\PhoneBookApplication.Android\obj\Debug\130\res\mipmap-xxhdpi\launcher_foreground.png
 C:\Users\varun\Phonebookfinalapp\PhoneBookApplication\PhoneBookApplication.Android\obj\Debug\130\res\mipmap-xxxhdpi\icon.png
 C:\Users\varun\Phonebookfinalapp\PhoneBookApplication\PhoneBookApplication.Android\obj\Debug\130\res\mipmap-xxxhdpi\launcher_foreground.png
+C:\Users\varun\Phonebookfinalapp\PhoneBookApplication\PhoneBookApplication.Android\obj\Debug\130\R.txt
 C:\Users\varun\Phonebookfinalapp\PhoneBookApplication\PhoneBookApplication.Android\obj\Debug\130\uploadflags.txt
 C:\Users\varun\Phonebookfinalapp\PhoneBookApplication\PhoneBookApplication.Android\obj\Debug\130\resolvedassemblies.hash
 C:\Users\varun\Phonebookfinalapp\PhoneBookApplication\PhoneBookApplication.Android\obj\Debug\130\android\assets\FormsViewGroup.dll

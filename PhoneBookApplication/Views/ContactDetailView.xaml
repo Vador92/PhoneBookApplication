@@ -1,24 +1,46 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:viewModels="clr-namespace:PhoneBookApplication.ViewModels"
              x:Class="PhoneBookApplication.Views.ContactDetailView">
-    <StackLayout>
 
-        <Button Text="Choose Picture From Gallery"
-                Command=""
+    <ContentPage.BindingContext>
+        <viewModels:ContactDetailViewModel />
+    </ContentPage.BindingContext>
+    
+    <StackLayout>
+        <Image x:Name="ProfilePicture"
+               Source="{Binding Contact.ProfilePicture}"
+               />
+        <Button Text="Choose Picture"
+                Command="{Binding ChooseCommand}"
+                />
+        <Button Text="Take Picture"
+                Command="{Binding TakeCommand}"
                 />
         <Entry x:Name="FirstName"
-              Placeholder="John"
+               Text="{Binding Contact.FirstName}"
+               Placeholder="John"
         />
         <Entry x:Name="LastName"
-              Placeholder="Doe"
+               Text="{Binding Contact.LastName}"
+               Placeholder="Doe"
         />
         <Entry x:Name="Email"
-              Placeholder="johndoe@example.com"
+               Text="{Binding Contact.Email}"
+               Placeholder="johndoe@example.com"
         />
         <Entry x:Name="Address"
-              Placeholder="123 Main St"
+               Text="{Binding Contact.Address}"
+               Placeholder="123 Main St"
+               
         />
+        <Button Text="Update Contact"
+                Command="{Binding UpdateCommand}"
+            />
+        <Button Text="Delete Contact"
+                Command="{Binding DeleteCommand}"
+                />
     </StackLayout>
     
     

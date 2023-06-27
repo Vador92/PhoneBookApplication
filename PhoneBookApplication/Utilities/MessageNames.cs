@@ -8,5 +8,7 @@ namespace PhoneBookApplication.Utilities
     {
         public const string ContactChangedMessage = "ContactChanged";
         public const string ContactSelectedMessage = "ContactSelected";
+        public const string ContactAddedMessage = "ContactAdded";
+        public const string ContactDeletedMessage = "ContactDeleted";
     }
 }

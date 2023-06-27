@@ -17,12 +17,12 @@ namespace PhoneBookApplication.Views {
     public partial class ContactOverviewView : global::Xamarin.Forms.ContentPage {
         
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Xamarin.Forms.Build.Tasks.XamlG", "2.0.0.0")]
-        private global::PhoneAppfinal.CustomControls.InfiniteListView ContactsListView;
+        private global::PhoneBookApplication.CustomControls.InfiniteListView ContactsListView;
         
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Xamarin.Forms.Build.Tasks.XamlG", "2.0.0.0")]
         private void InitializeComponent() {
             global::Xamarin.Forms.Xaml.Extensions.LoadFromXaml(this, typeof(ContactOverviewView));
-            ContactsListView = global::Xamarin.Forms.NameScopeExtensions.FindByName<global::PhoneAppfinal.CustomControls.InfiniteListView>(this, "ContactsListView");
+            ContactsListView = global::Xamarin.Forms.NameScopeExtensions.FindByName<global::PhoneBookApplication.CustomControls.InfiniteListView>(this, "ContactsListView");
         }
     }
 }
