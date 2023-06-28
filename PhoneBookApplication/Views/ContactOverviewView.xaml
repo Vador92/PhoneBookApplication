@@ -8,17 +8,25 @@
         <ToolbarItem Text="Add New Contact" Command="{Binding AddCommand}" />
     </ContentPage.ToolbarItems>
 
-    <Grid BackgroundColor="#CCEEFF">
+    <ContentPage.Background>
+        <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
+            <GradientStop Color="#0061ff" Offset="0" />
+            <GradientStop Color="#60efff" Offset="1" />
+        </LinearGradientBrush>
+    </ContentPage.Background>
+
+    <Grid BackgroundColor="Transparent">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
 
         <Label Text="My Phonebook"
+               FontAttributes="Bold"
                HorizontalOptions="Center"
                VerticalOptions="Center"
                FontSize="24"
-               TextColor="#333333"
+               TextColor="AliceBlue"
                Margin="0,20,0,10" />
 
         <customcontrols1:InfiniteListView Grid.Row="1"
@@ -26,16 +34,15 @@
                                          ItemsSource="{Binding Contacts}"
                                          x:Name="ContactsListView"
                                          ItemClickCommand="{Binding ContactSelectedCommand}"
-                                         Margin="10,0,10,10">
-            <ListView.ItemTemplate>
+                                         Margin="10,0,10,10"
+                                         BackgroundColor="Transparent">
+            <customcontrols1:InfiniteListView.ItemTemplate>
                 <DataTemplate>
                     <ViewCell>
                         <Grid Padding="10">
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="Auto" />
-                                <!-- Profile Picture Column -->
                                 <ColumnDefinition Width="*" />
-                                <!-- Details Column -->
                             </Grid.ColumnDefinitions>
 
                             <Image Source="{Binding ProfilePicture}"
@@ -51,19 +58,19 @@
                                 <Label>
                                     <Label.FormattedText>
                                         <FormattedString>
-                                            <Span Text="{Binding FirstName}" />
+                                            <Span Text="{Binding FirstName}" ForegroundColor="White" />
                                             <Span Text=" " />
-                                            <Span Text="{Binding LastName}" />
+                                            <Span Text="{Binding LastName}" ForegroundColor="White" />
                                         </FormattedString>
                                     </Label.FormattedText>
                                 </Label>
-                                <Label Text="{Binding Email}" />
-                                <Label Text="{Binding Address}" />
+                                <Label Text="{Binding Email}" TextColor="White" />
+                                <Label Text="{Binding Address}" TextColor="White" />
                             </StackLayout>
                         </Grid>
                     </ViewCell>
                 </DataTemplate>
-            </ListView.ItemTemplate>
+            </customcontrols1:InfiniteListView.ItemTemplate>
         </customcontrols1:InfiniteListView>
     </Grid>
 </ContentPage>

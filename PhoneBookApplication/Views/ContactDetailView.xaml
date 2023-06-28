@@ -7,6 +7,13 @@
         <viewModels:ContactDetailViewModel />
     </ContentPage.BindingContext>
 
+    <ContentPage.Background>
+        <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
+            <GradientStop Color="#0061ff" Offset="0" />
+            <GradientStop Color="#60efff" Offset="1" />
+        </LinearGradientBrush>
+    </ContentPage.Background>
+
     <Grid VerticalOptions="FillAndExpand">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />
@@ -36,9 +43,11 @@
                      Grid.Row="1"
                      HorizontalOptions="Center">
             <Button Text="Choose Picture"
+                    BackgroundColor="LightYellow" 
                     Command="{Binding ChooseCommand}"
                     Margin="5" />
             <Button Text="Take Picture"
+                    BackgroundColor="LightYellow"
                     Command="{Binding TakeCommand}"
                     Margin="5" />
         </StackLayout>
@@ -108,12 +117,14 @@
         </Grid>
 
         <Button Text="Update Contact"
+                BackgroundColor="LightGreen"
                 Command="{Binding UpdateCommand}"
                 Grid.Row="6"
                 Margin="10,0,10,10" />
 
         <Button Text="Delete Contact"
                 Command="{Binding DeleteCommand}"
+                BackgroundColor="PaleVioletRed"
                 Grid.Row="7"
                 Margin="10,0,10,10" />
     </Grid>

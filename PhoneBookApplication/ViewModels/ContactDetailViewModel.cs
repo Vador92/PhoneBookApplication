@@ -108,15 +108,7 @@ namespace PhoneBookApplication.ViewModels
 
                 if (stream != null)
                 {
-                    using (MemoryStream ms = new MemoryStream())
-                    {
-                        await stream.CopyToAsync(ms);
-                        byte[] imageBytes = ms.ToArray();
-                        string base64String = Convert.ToBase64String(imageBytes);
-
-                        // Set the base64 string as the ProfilePicture property
-                        Contact.ProfilePicture = base64String;
-                    }
+                    Contact.ProfilePicture = result.FullPath;
                 }
             }
             catch (Exception ex)

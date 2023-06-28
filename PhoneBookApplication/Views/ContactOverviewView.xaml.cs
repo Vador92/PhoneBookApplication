@@ -31,25 +31,3 @@ namespace PhoneBookApplication.Views
         }
     }
 }
-
-
-        
-
-        ////async void OnChooseClicked(Object sender, EventArgs e)
-        ////{
-        ////    var result = await MediaPicker.PickPhotoAsync(new MediaPickerOptions
-        ////    {
-        ////        Title = "Please pick a profile photo"
-        ////    });
-
-        ////    var stream = await result.OpenReadAsync();
-
-
-        ////     = ImageSource.FromStream(() => stream);
-
-        ////}
-
-        ////void OnTakeClicked(Object sender, EventArgs e)
-        ////{
-
-        ////}
