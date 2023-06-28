@@ -32,7 +32,7 @@
                HeightRequest="200"
                HorizontalOptions="Center" />
 
-        <!--<StackLayout Orientation="Horizontal"
+        <StackLayout Orientation="Horizontal"
                      Grid.Row="1"
                      HorizontalOptions="Center">
             <Button Text="Choose Picture"
@@ -41,7 +41,7 @@
             <Button Text="Take Picture"
                     Command="{Binding TakeCommand}"
                     Margin="5" />
-        </StackLayout>-->
+        </StackLayout>
 
         <Grid Grid.Row="2" Margin="10">
             <Grid.ColumnDefinitions>

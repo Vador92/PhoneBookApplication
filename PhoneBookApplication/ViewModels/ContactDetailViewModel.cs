@@ -14,42 +14,13 @@ using Xamarin.Forms.Xaml;
 using System.Runtime.CompilerServices;
 using System.Net.NetworkInformation;
 using System.Runtime.ExceptionServices;
+using System.IO;
 
 namespace PhoneBookApplication.ViewModels
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public class ContactDetailViewModel : BaseViewModel, INotifyPropertyChanged
     {
-
-        //code for setting the properties 
-        //private string _firstName;
-        //public string FirstNameEntry
-        //{
-        //    get { return _firstName; }
-        //    set { SetProperty(ref _firstName, value); }
-        //}
-
-        //private string _lastName;
-        //public string LastNameEntry
-        //{
-        //    get { return _lastName; }
-        //    set { SetProperty(ref _lastName, value); }
-        //}
-
-        //private string _email;
-        //public string EmailEntry
-        //{
-        //    get { return _email; }
-        //    set { SetProperty(ref _email, value); }
-        //}
-
-        //private string _address;
-        //public string AddressEntry
-        //{
-        //    get { return _address; }
-        //    set { SetProperty(ref _address, value); }
-        //}
-
 
         private Contact _contact;
 
@@ -61,10 +32,20 @@ namespace PhoneBookApplication.ViewModels
 
         public void SetContact(Contact contact)
         {
-            
-            Contact = contact;
+            if (contact != null)
+            {
+                Contact = contact;
+                _isNew = false;
+            }
+            else 
+            { 
+               Contact = new Contact();
+                _isNew = true;
+            }
     
         }
+
+        private bool _isNew = false;
 
         public ICommand UpdateCommand { get; set; }
         public ICommand DeleteCommand { get; set; }
@@ -78,35 +59,21 @@ namespace PhoneBookApplication.ViewModels
 
             UpdateCommand = new Command(OnUpdateCommand);
             DeleteCommand = new Command(OnDeleteCommand);
-            //ChooseCommand = new Command(OnChooseCommand);
+            ChooseCommand = new Command(OnChooseCommand);
             //TakeCommand = new Command(OnTakeCommand);
 
         }
 
-        public async void CreateContact()
-        {
-            Contact = new Models.Contact
-            {
-                Id = Guid.NewGuid(),
-                ProfilePicture = "https://www.nicepng.com/png/detail/933-9332131_profile-picture-default-png.png",
-                //FirstName = Contact.FirstName,
-                //LastName = Contact.LastName,
-                //Email = Contact.Email,
-                //Address = Contact.Address,
-            };
-            await App.Database.SaveContactAsync(Contact);
-        }
-
+      
+        
         private async void OnUpdateCommand()
         {
-            if (Contact == null)
+            if (_isNew)
             {
-                CreateContact();
-                // Create a new contact object
-
-
+                Contact.Id = Guid.NewGuid();
+                Contact.ProfilePicture = "https://www.pngarts.com/files/10/Default-Profile-Picture-Transparent-Image.png";
                 // Save the new contact
-                await App.Database.UpdateContactAsync(Contact);
+                await App.Database.SaveContactAsync(Contact);
 
                 // Assign the new contact to the Contact property
             }
@@ -128,36 +95,36 @@ namespace PhoneBookApplication.ViewModels
             await App.Current.MainPage.Navigation.PopAsync();
         }
 
-        //private async void OnChooseCommand()
-        //{
-        //    try
-        //    {
-        //        var result = await Xamarin.Essentials.MediaPicker.PickPhotoAsync(new Xamarin.Essentials.MediaPickerOptions
-        //        {
-        //            Title = "Choose photo from your gallery"
-        //        });
+        private async void OnChooseCommand()
+        {
+            try
+            {
+                var result = await Xamarin.Essentials.MediaPicker.PickPhotoAsync(new Xamarin.Essentials.MediaPickerOptions
+                {
+                    Title = "Choose photo from your gallery"
+                });
 
-        //        var stream = await result.OpenReadAsync();
+                var stream = await result.OpenReadAsync();
 
-        //        if (stream != null)
-        //        {
-        //            using (MemoryStream ms = new MemoryStream())
-        //            {
-        //                await stream.CopyToAsync(ms);
-        //                byte[] imageBytes = ms.ToArray();
-        //                string base64String = Convert.ToBase64String(imageBytes);
+                if (stream != null)
+                {
+                    using (MemoryStream ms = new MemoryStream())
+                    {
+                        await stream.CopyToAsync(ms);
+                        byte[] imageBytes = ms.ToArray();
+                        string base64String = Convert.ToBase64String(imageBytes);
 
-        //                // Set the base64 string as the ProfilePicture property
-        //                Contact.ProfilePicture = base64String;
-        //            }
-        //        }
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        // Handle the exception, e.g., display an error message
-        //        Console.WriteLine($"Error selecting photo: {ex.Message}");
-        //    }
-        //}
+                        // Set the base64 string as the ProfilePicture property
+                        Contact.ProfilePicture = base64String;
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                // Handle the exception, e.g., display an error message
+                Console.WriteLine($"Error selecting photo: {ex.Message}");
+            }
+        }
 
 
         //public async void OnTakeCommand()
