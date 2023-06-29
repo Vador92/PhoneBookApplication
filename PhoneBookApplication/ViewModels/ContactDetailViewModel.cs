@@ -60,7 +60,7 @@ namespace PhoneBookApplication.ViewModels
             UpdateCommand = new Command(OnUpdateCommand);
             DeleteCommand = new Command(OnDeleteCommand);
             ChooseCommand = new Command(OnChooseCommand);
-            //TakeCommand = new Command(OnTakeCommand);
+            TakeCommand = new Command(OnTakeCommand);
 
         }
 
@@ -132,33 +132,38 @@ namespace PhoneBookApplication.ViewModels
         }
 
 
-        //public async void OnTakeCommand()
-        //{
-        //    try
-        //    {
+        public async void OnTakeCommand()
+        {
+            try
+            {
+                var status = await Xamarin.Essentials.Permissions.CheckStatusAsync<Xamarin.Essentials.Permissions.Camera>();
+                if(status != Xamarin.Essentials.PermissionStatus.Granted)
+                {
+                    var allowedCamera = await Xamarin.Essentials.Permissions.RequestAsync<Xamarin.Essentials.Permissions.Camera>();
+                    if (allowedCamera == Xamarin.Essentials.PermissionStatus.Granted)
+                    {
+                        status = Xamarin.Essentials.PermissionStatus.Granted;
+                    }
+                }
+                if(status == Xamarin.Essentials.PermissionStatus.Granted)
+                {
+                    var result = await Xamarin.Essentials.MediaPicker.CapturePhotoAsync();
+                    var stream = await result.OpenReadAsync();
 
-        //        var result = await Xamarin.Essentials.MediaPicker.CapturePhotoAsync();
-        //        var stream = await result.OpenReadAsync();
-
-        //        if (stream != null)
-        //        {
-        //            using (MemoryStream ms = new MemoryStream())
-        //            {
-        //                stream.CopyTo(ms);
-        //                byte[] imageBytes = ms.ToArray();
-        //                string base64String = Convert.ToBase64String(imageBytes);
-
-        //                // Set the base64 string as the ProfilePicture property
-        //                Contact.ProfilePicture = base64String;
-        //            }
-        //        }
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        // Handle any exceptions that may occur during image capture
-        //        Console.WriteLine($"Error capturing photo: {ex.Message}");
-        //    }
-        //}
+                    if (stream != null)
+                    {
+                        Contact.ProfilePicture = result.FullPath;
+                        OnPropertyChanged(nameof(Contact));
+                    }
+                }
+                
+            }
+            catch (Exception ex)
+            {
+                // Handle any exceptions that may occur during image capture
+                Console.WriteLine($"Error capturing photo: {ex.Message}");
+            }
+        }
 
 
 
