@@ -21,15 +21,17 @@ namespace PhoneBookApplication.ViewModels
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public class ContactDetailViewModel : BaseViewModel, INotifyPropertyChanged
     {
-
+        //initializing the setter properties for the view
         private Contact _contact;
-
         public Contact Contact
         {
             get { return _contact; }
             set { SetProperty(ref _contact, value); }
         }
 
+
+        //If we pass in a nonnull, we make that as the set contact that we are going to be updating based on the user inputs
+        //else we create a new contact in which we tell the program to make the new contact based on user inputs, but also making sure that they fill in the required fields
         public void SetContact(Contact contact)
         {
             if (contact != null)
@@ -45,8 +47,15 @@ namespace PhoneBookApplication.ViewModels
     
         }
 
+        //used as a means of determining whether we save or create using the database commands
         private bool _isNew = false;
 
+
+        //icommands are implemented for the different operations
+        //update -> used to update an existing contact with altered details of what the user changes
+        //delete -> used to delete that setContact from the database, if the contact exists.
+        //choose -> allows user to access gallery of phone and choose an existing image from there
+        //take -> allows user to use phone camera to take a profile picture
         public ICommand UpdateCommand { get; set; }
         public ICommand DeleteCommand { get; set; }
 
@@ -54,6 +63,8 @@ namespace PhoneBookApplication.ViewModels
 
         public ICommand TakeCommand { get; set; }
 
+
+        //initalizes the commands, providing functionality between the front and backend
         public ContactDetailViewModel()
         {
 
@@ -61,24 +72,28 @@ namespace PhoneBookApplication.ViewModels
             DeleteCommand = new Command(OnDeleteCommand);
             ChooseCommand = new Command(OnChooseCommand);
             TakeCommand = new Command(OnTakeCommand);
-
         }
 
       
-        
+        //if contact is new, we save (create it) in the database, else we update the existing contact in the database, and then we pop the page (move back to overview)
         private async void OnUpdateCommand()
         {
             if (_isNew)
             {
-                Contact.Id = Guid.NewGuid();
-                if(Contact.ProfilePicture == null)
+                //required to create new contact
+                if(!string.IsNullOrWhiteSpace(Contact.FirstName) 
+                    && !string.IsNullOrWhiteSpace(Contact.LastName)
+                    && !string.IsNullOrWhiteSpace(Contact.Email)
+                    && !string.IsNullOrWhiteSpace(Contact.Address))
                 {
-                    Contact.ProfilePicture = "https://www.pngarts.com/files/10/Default-Profile-Picture-Transparent-Image.png";
+                    Contact.Id = Guid.NewGuid();
+                    if (Contact.ProfilePicture == null)
+                    {
+                        Contact.ProfilePicture = "https://www.pngarts.com/files/10/Default-Profile-Picture-Transparent-Image.png";
+                    }
+                    // Save the new contact
+                    await App.Database.SaveContactAsync(Contact);
                 }
-                // Save the new contact
-                await App.Database.SaveContactAsync(Contact);
-
-                // Assign the new contact to the Contact property
             }
             else
             {
@@ -88,6 +103,8 @@ namespace PhoneBookApplication.ViewModels
             await App.Current.MainPage.Navigation.PopAsync();
         }
 
+
+        //
         public async void OnDeleteCommand()
         {
             if (Contact != null)
