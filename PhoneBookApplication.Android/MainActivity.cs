@@ -26,5 +26,6 @@ namespace PhoneBookApplication.Droid
 
             base.OnRequestPermissionsResult(requestCode, permissions, grantResults);
         }
+
     }
 }

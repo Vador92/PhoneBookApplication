@@ -71,7 +71,10 @@ namespace PhoneBookApplication.ViewModels
             if (_isNew)
             {
                 Contact.Id = Guid.NewGuid();
-                Contact.ProfilePicture = "https://www.pngarts.com/files/10/Default-Profile-Picture-Transparent-Image.png";
+                if(Contact.ProfilePicture == null)
+                {
+                    Contact.ProfilePicture = "https://www.pngarts.com/files/10/Default-Profile-Picture-Transparent-Image.png";
+                }
                 // Save the new contact
                 await App.Database.SaveContactAsync(Contact);
 
@@ -99,17 +102,27 @@ namespace PhoneBookApplication.ViewModels
         {
             try
             {
-                var result = await Xamarin.Essentials.MediaPicker.PickPhotoAsync(new Xamarin.Essentials.MediaPickerOptions
+                var status = await Xamarin.Essentials.Permissions.CheckStatusAsync<Xamarin.Essentials.Permissions.Photos>();
+                if(status != Xamarin.Essentials.PermissionStatus.Granted)
                 {
-                    Title = "Choose photo from your gallery"
-                });
-
-                var stream = await result.OpenReadAsync();
-
-                if (stream != null)
-                {
-                    Contact.ProfilePicture = result.FullPath;
+                    var allowPic = await Xamarin.Essentials.Permissions.RequestAsync<Xamarin.Essentials.Permissions.Photos>();
+                    if(allowPic == Xamarin.Essentials.PermissionStatus.Granted)
+                    {
+                        status = Xamarin.Essentials.PermissionStatus.Granted;
+                    }
                 }
+                if(status == Xamarin.Essentials.PermissionStatus.Granted)
+                {
+                    var result = await Xamarin.Essentials.MediaPicker.PickPhotoAsync();
+
+                    var stream = await result.OpenReadAsync();
+
+                    if (stream != null)
+                    {
+                        Contact.ProfilePicture = result.FullPath;
+                        OnPropertyChanged(nameof(Contact));
+                    }
+                }  
             }
             catch (Exception ex)
             {
@@ -123,6 +136,7 @@ namespace PhoneBookApplication.ViewModels
         //{
         //    try
         //    {
+
         //        var result = await Xamarin.Essentials.MediaPicker.CapturePhotoAsync();
         //        var stream = await result.OpenReadAsync();
 
