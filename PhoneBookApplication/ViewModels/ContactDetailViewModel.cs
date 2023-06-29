@@ -50,17 +50,21 @@ namespace PhoneBookApplication.ViewModels
         //used as a means of determining whether we save or create using the database commands
         private bool _isNew = false;
 
+        public bool _readOnly = true;
+        public bool _isEditable = false;
+
+
 
         //icommands are implemented for the different operations
         //update -> used to update an existing contact with altered details of what the user changes
         //delete -> used to delete that setContact from the database, if the contact exists.
         //choose -> allows user to access gallery of phone and choose an existing image from there
+        //toggle -> allows user to edit the detail page
         //take -> allows user to use phone camera to take a profile picture
         public ICommand UpdateCommand { get; set; }
         public ICommand DeleteCommand { get; set; }
-
         public ICommand ChooseCommand { get; set; }
-
+        public ICommand ToggledCommand { get; set; }
         public ICommand TakeCommand { get; set; }
 
 
@@ -72,6 +76,7 @@ namespace PhoneBookApplication.ViewModels
             DeleteCommand = new Command(OnDeleteCommand);
             ChooseCommand = new Command(OnChooseCommand);
             TakeCommand = new Command(OnTakeCommand);
+            ToggledCommand = new Command(OnToggledCommand);
         }
 
       
@@ -104,7 +109,7 @@ namespace PhoneBookApplication.ViewModels
         }
 
 
-        //
+        //deletes the contact if it exists in the database already
         public async void OnDeleteCommand()
         {
             if (Contact != null)
@@ -115,7 +120,9 @@ namespace PhoneBookApplication.ViewModels
             await App.Current.MainPage.Navigation.PopAsync();
         }
 
-        private async void OnChooseCommand()
+
+        //this checks the permissions for accessing photos and sends that image file info as the profile picture for the contact that the user is creating or updating
+        public async void OnChooseCommand()
         {
             try
             {
@@ -149,6 +156,7 @@ namespace PhoneBookApplication.ViewModels
         }
 
 
+        //checks camera permissions and then allows that picture that was taken to be used as the contact profile picture
         public async void OnTakeCommand()
         {
             try
@@ -180,6 +188,15 @@ namespace PhoneBookApplication.ViewModels
                 // Handle any exceptions that may occur during image capture
                 Console.WriteLine($"Error capturing photo: {ex.Message}");
             }
+        }
+
+
+
+        //enables the ability to edit the details of the page
+        public void OnToggledCommand()
+        {
+            _readOnly = !_readOnly;
+            _isEditable = !_isEditable;
         }
 
 

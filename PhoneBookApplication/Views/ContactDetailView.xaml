@@ -7,6 +7,10 @@
         <viewModels:ContactDetailViewModel />
     </ContentPage.BindingContext>
 
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Text="Edit Contact" Command="{Binding ToggledCommand}" />
+    </ContentPage.ToolbarItems>
+    
     <ContentPage.Background>
         <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
             <GradientStop Color="#0061ff" Offset="0" />
@@ -41,7 +45,8 @@
 
         <StackLayout Orientation="Horizontal"
                      Grid.Row="1"
-                     HorizontalOptions="Center">
+                     HorizontalOptions="Center"
+                     IsVisible="{Binding _isEditable}">
             <Button Text="Choose Picture"
                     BackgroundColor="LightYellow" 
                     Command="{Binding ChooseCommand}"
@@ -63,6 +68,7 @@
                    VerticalTextAlignment="Center" />
             <Entry x:Name="FirstNameEntry"
                    Text="{Binding Contact.FirstName}"
+                   IsReadOnly="{Binding _readOnly}"
                    Placeholder="John"
                    Grid.Column="1"
                    Margin="10,0,0,0" />
@@ -79,6 +85,7 @@
                    VerticalTextAlignment="Center" />
             <Entry x:Name="LastNameEntry"
                    Text="{Binding Contact.LastName}"
+                   IsReadOnly="{Binding _readOnly}"
                    Placeholder="Doe"
                    Grid.Column="1"
                    Margin="10,0,0,0" />
@@ -95,6 +102,7 @@
                    VerticalTextAlignment="Center" />
             <Entry x:Name="EmailEntry"
                    Text="{Binding Contact.Email}"
+                   IsReadOnly="{Binding _readOnly}"
                    Placeholder="johndoe@example.com"
                    Grid.Column="1"
                    Margin="10,0,0,0" />
@@ -111,6 +119,7 @@
                    VerticalTextAlignment="Center" />
             <Entry x:Name="AddressEntry"
                    Text="{Binding Contact.Address}"
+                   IsReadOnly="{Binding _readOnly}"
                    Placeholder="123 Main St"
                    Grid.Column="1"
                    Margin="10,0,0,0" />
