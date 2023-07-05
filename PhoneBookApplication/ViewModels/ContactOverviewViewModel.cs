@@ -37,6 +37,7 @@ namespace PhoneBookApplication.ViewModels
             }
         }
 
+        //sets contact to the one that the user clicked on the overviewpage
         private Contact _SelectedContact;
         public Contact SelectedContact
         {
@@ -48,6 +49,7 @@ namespace PhoneBookApplication.ViewModels
             }
         }
 
+        //intialzies the commands needed to complete the task of adding and editing an existing contact
         public ContactOverviewViewModel()
         {
             AddCommand = new Command(OnAddCommand);
@@ -57,13 +59,14 @@ namespace PhoneBookApplication.ViewModels
             });
         }
         
-        
+        //navigates to contactdetailviewpage with existing contact
         private void OnContactSelectedCommand(Object contact)
         {
             Contact selectedContact = contact as Contact;
             App.Current.MainPage.Navigation.PushAsync(new ContactDetailView(selectedContact));
         }
 
+        //navigates to the contact detail view page, without an existing contact
         private void OnAddCommand()
         {
             App.Current.MainPage.Navigation.PushAsync(new ContactDetailView());

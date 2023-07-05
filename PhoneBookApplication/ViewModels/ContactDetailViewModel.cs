@@ -34,7 +34,7 @@ namespace PhoneBookApplication.ViewModels
         }
 
 
-
+        //initalizes the editable components on the detailpage, such as the take photo choose photo, and update and delete buttons
         private bool _isEditable;
         public bool IsEditable
         {
@@ -46,6 +46,8 @@ namespace PhoneBookApplication.ViewModels
             }
         }
 
+
+        //initalizes the entries on the detailpage where they are only to be able to be read until the user clicks edit contact
         private bool _isReadable;
         public bool IsReadable
         {
@@ -142,6 +144,8 @@ namespace PhoneBookApplication.ViewModels
 
         }
 
+
+        //condenses the checking for if the new contact or existing contact houses valid entries
         public bool OnValidateCommand()
         {
             if (!string.IsNullOrWhiteSpace(Contact.FirstName)

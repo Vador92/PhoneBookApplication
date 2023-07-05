@@ -21,6 +21,44 @@ namespace PhoneBookApplication.Views
             ViewModelLocator.ContactDetailViewModel.SetContact(contact);
 
         }
+		
+		public void Handle_TextChanged(object sender, TextChangedEventArgs e)
+		{
+			if (string.IsNullOrWhiteSpace(FirstNameEntry.Text))
+			{
+				VisualStateManager.GoToState(FirstNameEntry, "Invalid");
+			}
+			else
+			{
+				VisualStateManager.GoToState(FirstNameEntry, "Normal");
+			}
 
+            if (string.IsNullOrWhiteSpace(LastNameEntry.Text))
+            {
+                VisualStateManager.GoToState(LastNameEntry, "Invalid");
+            }
+            else
+            {
+                VisualStateManager.GoToState(LastNameEntry, "Normal");
+            }
+
+            if (string.IsNullOrWhiteSpace(EmailEntry.Text))
+            {
+                VisualStateManager.GoToState(EmailEntry, "Invalid");
+            }
+            else
+            {
+                VisualStateManager.GoToState(EmailEntry, "Normal");
+            }
+
+            if (string.IsNullOrWhiteSpace(AddressEntry.Text))
+            {
+                VisualStateManager.GoToState(AddressEntry, "Invalid");
+            }
+            else
+            {
+                VisualStateManager.GoToState(AddressEntry, "Normal");
+            }
+        }
     }
 }

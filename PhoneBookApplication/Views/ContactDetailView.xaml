@@ -11,6 +11,28 @@
         <viewModels:ContactDetailViewModel />
     </ContentPage.BindingContext>
 
+    <ContentPage.Resources>
+        <Style TargetType="Entry">
+            <Setter Property="VisualStateManager.VisualStateGroups">
+                <VisualStateGroupList>
+                    <VisualStateGroup x:Name="CommonStates">
+                        <VisualState x:Name="Normal">
+                            <VisualState.Setters>
+                                <Setter Property="BackgroundColor" Value="Transparent"/>
+                            </VisualState.Setters>
+                        </VisualState>
+                        <VisualState x:Name="Invalid">
+                            <VisualState.Setters>
+                                <Setter Property="BackgroundColor" Value="PaleVioletRed"/>
+                            </VisualState.Setters>
+                        </VisualState>
+                    </VisualStateGroup>
+                </VisualStateGroupList>
+            </Setter>
+                    
+        </Style>
+    </ContentPage.Resources>
+    
     
     <ContentPage.ToolbarItems>
         <ToolbarItem Text="Edit Contact" Command="{Binding ToggledEditCommand}" />
