@@ -24,7 +24,7 @@ namespace PhoneBookApplication.Views
 		}
 
         //displays the database as contacts on the homepage
-        protected override async void OnAppearing()
+        protected override void OnAppearing()
         {
             base.OnAppearing();
             viewModel.OnGetContactsCommand();

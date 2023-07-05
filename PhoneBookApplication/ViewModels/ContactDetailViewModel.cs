@@ -15,6 +15,8 @@ using System.Runtime.CompilerServices;
 using System.Net.NetworkInformation;
 using System.Runtime.ExceptionServices;
 using System.IO;
+using System.Collections.Specialized;
+using System.Diagnostics;
 
 namespace PhoneBookApplication.ViewModels
 {
@@ -54,7 +56,6 @@ namespace PhoneBookApplication.ViewModels
         public bool _isEditable = false;
 
 
-
         //icommands are implemented for the different operations
         //update -> used to update an existing contact with altered details of what the user changes
         //delete -> used to delete that setContact from the database, if the contact exists.
@@ -66,6 +67,7 @@ namespace PhoneBookApplication.ViewModels
         public ICommand ChooseCommand { get; set; }
         public ICommand ToggledCommand { get; set; }
         public ICommand TakeCommand { get; set; }
+
 
 
         //initalizes the commands, providing functionality between the front and backend
@@ -99,6 +101,7 @@ namespace PhoneBookApplication.ViewModels
                     // Save the new contact
                     await App.Database.SaveContactAsync(Contact);
                 }
+                
             }
             else
             {
@@ -109,17 +112,27 @@ namespace PhoneBookApplication.ViewModels
         }
 
 
+
         //deletes the contact if it exists in the database already
         public async void OnDeleteCommand()
         {
             if (Contact != null)
             {
-                App.Database.DeleteContactAsync(Contact);
+                bool answer = await App.Current.MainPage.DisplayAlert("Confirmation","Are you sure you want to delete this contact?","Yes","No");
+                if(answer)
+                {
+                    await App.Database.DeleteContactAsync(Contact);
+                    await App.Current.MainPage.Navigation.PopAsync();
+                }
             }
-
-            await App.Current.MainPage.Navigation.PopAsync();
         }
+        
 
+        //public async string DisplayAlert()
+        //{
+        //    var answer =  await DisplayAlert("Confirmation", "Are you sure you want to delete this Contact?", "Yes", "No");
+        //    Debug.WriteLine("Answer = " +(answer? "Yes":"No"));
+        //}
 
         //this checks the permissions for accessing photos and sends that image file info as the profile picture for the contact that the user is creating or updating
         public async void OnChooseCommand()

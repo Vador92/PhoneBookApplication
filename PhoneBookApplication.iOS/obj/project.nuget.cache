@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "pUVkR20tFDgOnMWcQL+FPm48lkpB5JTT63+ahYxtWYF6gahTAJqGVc82sCioBCR5qNj4KTdYRR39hmWpOC8NXQ==",
+  "dgSpecHash": "bjfjnRzR6ys2Oz/94TIE9vwFYnvj38EeZtSwhs21g6x8nKnzYPOIuE1RUT3ayihlKTmaHGAKNiBRH9MAxDXXMw==",
   "success": true,
   "projectFilePath": "C:\\Users\\varun\\Phonebookfinalapp\\PhoneBookApplication\\PhoneBookApplication.iOS\\PhoneBookApplication.iOS.csproj",
   "expectedPackageFiles": [
@@ -12,8 +12,9 @@
     "C:\\Users\\varun\\.nuget\\packages\\system.memory\\4.5.3\\system.memory.4.5.3.nupkg.sha512",
     "C:\\Users\\varun\\.nuget\\packages\\system.numerics.vectors\\4.5.0\\system.numerics.vectors.4.5.0.nupkg.sha512",
     "C:\\Users\\varun\\.nuget\\packages\\system.runtime.compilerservices.unsafe\\4.5.2\\system.runtime.compilerservices.unsafe.4.5.2.nupkg.sha512",
-    "C:\\Users\\varun\\.nuget\\packages\\xamarin.essentials\\1.7.0\\xamarin.essentials.1.7.0.nupkg.sha512",
-    "C:\\Users\\varun\\.nuget\\packages\\xamarin.forms\\5.0.0.2196\\xamarin.forms.5.0.0.2196.nupkg.sha512"
+    "C:\\Users\\varun\\.nuget\\packages\\xamarin.communitytoolkit\\2.0.6\\xamarin.communitytoolkit.2.0.6.nupkg.sha512",
+    "C:\\Users\\varun\\.nuget\\packages\\xamarin.essentials\\1.8.0-preview1\\xamarin.essentials.1.8.0-preview1.nupkg.sha512",
+    "C:\\Users\\varun\\.nuget\\packages\\xamarin.forms\\5.0.0.2599-pre1\\xamarin.forms.5.0.0.2599-pre1.nupkg.sha512"
   ],
   "logs": []
 }

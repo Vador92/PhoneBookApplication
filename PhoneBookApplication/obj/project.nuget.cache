@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "wOgBcVSVMlZJqwIUG6LFBH4aUTt5H3Jo5FkEHO98iH0b/PC4HMs3mzkr1MkhNb0s/XAQJSVDvMRptEpUPj93Ng==",
+  "dgSpecHash": "HoMfyHToOp2G5ZU2To5cxhPGe3WMPQ2ImlWeZTi9ZphdxVDT0nY6XJA2RwKxdUN32wO+AHmphdggyVfEMdEfXw==",
   "success": true,
   "projectFilePath": "C:\\Users\\varun\\Phonebookfinalapp\\PhoneBookApplication\\PhoneBookApplication\\PhoneBookApplication.csproj",
   "expectedPackageFiles": [
@@ -14,9 +14,13 @@
     "C:\\Users\\varun\\.nuget\\packages\\system.buffers\\4.4.0\\system.buffers.4.4.0.nupkg.sha512",
     "C:\\Users\\varun\\.nuget\\packages\\system.memory\\4.5.3\\system.memory.4.5.3.nupkg.sha512",
     "C:\\Users\\varun\\.nuget\\packages\\system.numerics.vectors\\4.5.0\\system.numerics.vectors.4.5.0.nupkg.sha512",
-    "C:\\Users\\varun\\.nuget\\packages\\system.runtime.compilerservices.unsafe\\4.5.2\\system.runtime.compilerservices.unsafe.4.5.2.nupkg.sha512",
-    "C:\\Users\\varun\\.nuget\\packages\\xamarin.essentials\\1.7.0\\xamarin.essentials.1.7.0.nupkg.sha512",
-    "C:\\Users\\varun\\.nuget\\packages\\xamarin.forms\\5.0.0.2196\\xamarin.forms.5.0.0.2196.nupkg.sha512"
+    "C:\\Users\\varun\\.nuget\\packages\\system.reflection.emit.ilgeneration\\4.7.0\\system.reflection.emit.ilgeneration.4.7.0.nupkg.sha512",
+    "C:\\Users\\varun\\.nuget\\packages\\system.reflection.emit.lightweight\\4.7.0\\system.reflection.emit.lightweight.4.7.0.nupkg.sha512",
+    "C:\\Users\\varun\\.nuget\\packages\\system.runtime.compilerservices.unsafe\\4.5.3\\system.runtime.compilerservices.unsafe.4.5.3.nupkg.sha512",
+    "C:\\Users\\varun\\.nuget\\packages\\system.threading.tasks.extensions\\4.5.4\\system.threading.tasks.extensions.4.5.4.nupkg.sha512",
+    "C:\\Users\\varun\\.nuget\\packages\\xamarin.communitytoolkit\\2.0.6\\xamarin.communitytoolkit.2.0.6.nupkg.sha512",
+    "C:\\Users\\varun\\.nuget\\packages\\xamarin.essentials\\1.8.0-preview1\\xamarin.essentials.1.8.0-preview1.nupkg.sha512",
+    "C:\\Users\\varun\\.nuget\\packages\\xamarin.forms\\5.0.0.2599-pre1\\xamarin.forms.5.0.0.2599-pre1.nupkg.sha512"
   ],
   "logs": []
 }

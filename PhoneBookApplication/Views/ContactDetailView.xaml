@@ -46,7 +46,7 @@
         <StackLayout Orientation="Horizontal"
                      Grid.Row="1"
                      HorizontalOptions="Center"
-                     IsVisible="{Binding _isEditable}">
+                     >
             <Button Text="Choose Picture"
                     BackgroundColor="LightYellow" 
                     Command="{Binding ChooseCommand}"
@@ -68,7 +68,7 @@
                    VerticalTextAlignment="Center" />
             <Entry x:Name="FirstNameEntry"
                    Text="{Binding Contact.FirstName}"
-                   IsReadOnly="{Binding _readOnly}"
+                   IsEnabled="{Binding _isEditable}"
                    Placeholder="John"
                    Grid.Column="1"
                    Margin="10,0,0,0" />
@@ -128,11 +128,13 @@
         <Button Text="Update Contact"
                 BackgroundColor="LightGreen"
                 Command="{Binding UpdateCommand}"
+                IsVisible="{Binding _isEditable}"
                 Grid.Row="6"
                 Margin="10,0,10,10" />
 
         <Button Text="Delete Contact"
                 Command="{Binding DeleteCommand}"
+                IsVisible="{Binding _isEditable}"
                 BackgroundColor="PaleVioletRed"
                 Grid.Row="7"
                 Margin="10,0,10,10" />
