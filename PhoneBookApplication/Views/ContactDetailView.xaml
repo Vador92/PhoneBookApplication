@@ -1,14 +1,19 @@
 ﻿<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:viewModels="clr-namespace:PhoneBookApplication.ViewModels"
-             x:Class="PhoneBookApplication.Views.ContactDetailView">
+             xmlns:xct="http://xamarin.com/schemas/2020/toolkit"
+             xmlns:converters="clr-namespace:PhoneBookApplication"
+             x:Class="PhoneBookApplication.Views.ContactDetailView"
+             >
+             
 
     <ContentPage.BindingContext>
         <viewModels:ContactDetailViewModel />
     </ContentPage.BindingContext>
 
+    
     <ContentPage.ToolbarItems>
-        <ToolbarItem Text="Edit Contact" Command="{Binding ToggledCommand}" />
+        <ToolbarItem Text="Edit Contact" Command="{Binding ToggledEditCommand}" />
     </ContentPage.ToolbarItems>
     
     <ContentPage.Background>
@@ -35,24 +40,32 @@
             <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
 
+
         <Image x:Name="ProfilePictureEntry"
-               Source="{Binding Contact.ProfilePicture}"
                Grid.Row="0"
                Aspect="AspectFit"
                WidthRequest="200"
                HeightRequest="200"
-               HorizontalOptions="Center" />
+               HorizontalOptions="Center">
+               <Image.Source>
+                    <Binding Path="Contact.ProfilePicture"
+                    FallbackValue="https://www.pngarts.com/files/10/Default-Profile-Picture-Transparent-Image.png"
+                    TargetNullValue="https://www.pngarts.com/files/10/Default-Profile-Picture-Transparent-Image.png" />
+               </Image.Source>
+        </Image>
 
         <StackLayout Orientation="Horizontal"
                      Grid.Row="1"
                      HorizontalOptions="Center"
                      >
-            <Button Text="Choose Picture"
+            <Button Text="Choose Picture" 
                     BackgroundColor="LightYellow" 
+                    IsVisible ="{Binding IsEditable}"
                     Command="{Binding ChooseCommand}"
                     Margin="5" />
             <Button Text="Take Picture"
                     BackgroundColor="LightYellow"
+                    IsVisible ="{Binding IsEditable}"
                     Command="{Binding TakeCommand}"
                     Margin="5" />
         </StackLayout>
@@ -65,13 +78,16 @@
 
             <Label Text="First Name:"
                    VerticalOptions="Center"
+                   TextColor="White"
                    VerticalTextAlignment="Center" />
             <Entry x:Name="FirstNameEntry"
                    Text="{Binding Contact.FirstName}"
-                   IsEnabled="{Binding _isEditable}"
+                   IsReadOnly="{Binding IsReadable}"
+                   TextColor="White"
                    Placeholder="John"
                    Grid.Column="1"
-                   Margin="10,0,0,0" />
+                   Margin="10,0,0,0">
+            </Entry>
         </Grid>
 
         <Grid Grid.Row="3" Margin="10">
@@ -82,10 +98,12 @@
 
             <Label Text="Last Name:"
                    VerticalOptions="Center"
+                   TextColor="White"
                    VerticalTextAlignment="Center" />
             <Entry x:Name="LastNameEntry"
                    Text="{Binding Contact.LastName}"
-                   IsReadOnly="{Binding _readOnly}"
+                   IsReadOnly="{Binding IsReadable}"
+                   TextColor="White"
                    Placeholder="Doe"
                    Grid.Column="1"
                    Margin="10,0,0,0" />
@@ -99,13 +117,17 @@
 
             <Label Text="Email:"
                    VerticalOptions="Center"
+                   TextColor="White"
                    VerticalTextAlignment="Center" />
             <Entry x:Name="EmailEntry"
                    Text="{Binding Contact.Email}"
-                   IsReadOnly="{Binding _readOnly}"
+                   IsReadOnly="{Binding IsReadable}"
+                   TextColor="White"
                    Placeholder="johndoe@example.com"
                    Grid.Column="1"
-                   Margin="10,0,0,0" />
+                   Margin="10,0,0,0">
+            </Entry>
+             
         </Grid>
 
         <Grid Grid.Row="5" Margin="10">
@@ -115,11 +137,13 @@
             </Grid.ColumnDefinitions>
 
             <Label Text="Address:"
+                   TextColor="White"
                    VerticalOptions="Center"
                    VerticalTextAlignment="Center" />
             <Entry x:Name="AddressEntry"
+                   TextColor="White"
                    Text="{Binding Contact.Address}"
-                   IsReadOnly="{Binding _readOnly}"
+                   IsReadOnly="{Binding IsReadable}"
                    Placeholder="123 Main St"
                    Grid.Column="1"
                    Margin="10,0,0,0" />
@@ -128,13 +152,13 @@
         <Button Text="Update Contact"
                 BackgroundColor="LightGreen"
                 Command="{Binding UpdateCommand}"
-                IsVisible="{Binding _isEditable}"
+                IsVisible="{Binding IsEditable}"
                 Grid.Row="6"
                 Margin="10,0,10,10" />
 
         <Button Text="Delete Contact"
                 Command="{Binding DeleteCommand}"
-                IsVisible="{Binding _isEditable}"
+                IsVisible="{Binding IsEditable}"
                 BackgroundColor="PaleVioletRed"
                 Grid.Row="7"
                 Margin="10,0,10,10" />

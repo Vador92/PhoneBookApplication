@@ -17,12 +17,14 @@ using System.Runtime.ExceptionServices;
 using System.IO;
 using System.Collections.Specialized;
 using System.Diagnostics;
+using Xamarin.CommunityToolkit.Converters;
 
 namespace PhoneBookApplication.ViewModels
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public class ContactDetailViewModel : BaseViewModel, INotifyPropertyChanged
     {
+
         //initializing the setter properties for the view
         private Contact _contact;
         public Contact Contact
@@ -32,6 +34,31 @@ namespace PhoneBookApplication.ViewModels
         }
 
 
+
+        private bool _isEditable;
+        public bool IsEditable
+        {
+            get { return _isEditable; }
+            set
+            {
+                _isEditable = value;
+                OnPropertyChanged(nameof(IsEditable));
+            }
+        }
+
+        private bool _isReadable;
+        public bool IsReadable
+        {
+            get { return _isReadable; }
+            set
+            {
+                _isReadable = value;
+                OnPropertyChanged(nameof(IsReadable));
+            }
+        }
+
+
+
         //If we pass in a nonnull, we make that as the set contact that we are going to be updating based on the user inputs
         //else we create a new contact in which we tell the program to make the new contact based on user inputs, but also making sure that they fill in the required fields
         public void SetContact(Contact contact)
@@ -39,21 +66,22 @@ namespace PhoneBookApplication.ViewModels
             if (contact != null)
             {
                 Contact = contact;
+                IsEditable = false;
+                IsReadable = true;
                 _isNew = false;
             }
             else 
             { 
-               Contact = new Contact();
+                Contact = new Contact();
+                IsReadable = false;
+                IsEditable = true;
                 _isNew = true;
             }
-    
         }
 
         //used as a means of determining whether we save or create using the database commands
         private bool _isNew = false;
 
-        public bool _readOnly = true;
-        public bool _isEditable = false;
 
 
         //icommands are implemented for the different operations
@@ -65,9 +93,9 @@ namespace PhoneBookApplication.ViewModels
         public ICommand UpdateCommand { get; set; }
         public ICommand DeleteCommand { get; set; }
         public ICommand ChooseCommand { get; set; }
-        public ICommand ToggledCommand { get; set; }
+        public ICommand ToggledEditCommand { get; private set; }
+        public ICommand ToggledReadCommand { get; private set; }
         public ICommand TakeCommand { get; set; }
-
 
 
         //initalizes the commands, providing functionality between the front and backend
@@ -78,20 +106,19 @@ namespace PhoneBookApplication.ViewModels
             DeleteCommand = new Command(OnDeleteCommand);
             ChooseCommand = new Command(OnChooseCommand);
             TakeCommand = new Command(OnTakeCommand);
-            ToggledCommand = new Command(OnToggledCommand);
+            ToggledEditCommand = new Command(ToggledEditability);
+            ToggledReadCommand = new Command(ToggledEditability);
+            
         }
 
       
         //if contact is new, we save (create it) in the database, else we update the existing contact in the database, and then we pop the page (move back to overview)
         private async void OnUpdateCommand()
         {
+            var valid = OnValidateCommand();
             if (_isNew)
             {
-                //required to create new contact
-                if(!string.IsNullOrWhiteSpace(Contact.FirstName) 
-                    && !string.IsNullOrWhiteSpace(Contact.LastName)
-                    && !string.IsNullOrWhiteSpace(Contact.Email)
-                    && !string.IsNullOrWhiteSpace(Contact.Address))
+                if(valid)
                 {
                     Contact.Id = Guid.NewGuid();
                     if (Contact.ProfilePicture == null)
@@ -100,17 +127,35 @@ namespace PhoneBookApplication.ViewModels
                     }
                     // Save the new contact
                     await App.Database.SaveContactAsync(Contact);
-                }
+                    await App.Current.MainPage.Navigation.PopAsync();
+                }                  
                 
             }
             else
             {
-                await App.Database.UpdateContactAsync(Contact);
+                if (valid)
+                {
+                    await App.Database.UpdateContactAsync(Contact);
+                    await App.Current.MainPage.Navigation.PopAsync();
+                }
             }            
 
-            await App.Current.MainPage.Navigation.PopAsync();
         }
 
+        public bool OnValidateCommand()
+        {
+            if (!string.IsNullOrWhiteSpace(Contact.FirstName)
+                    && !string.IsNullOrWhiteSpace(Contact.LastName)
+                    && !string.IsNullOrWhiteSpace(Contact.Email)
+                    && !string.IsNullOrWhiteSpace(Contact.Address))
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
 
 
         //deletes the contact if it exists in the database already
@@ -118,6 +163,7 @@ namespace PhoneBookApplication.ViewModels
         {
             if (Contact != null)
             {
+                //displays delete confirmation alert so that the user does not accidentally delete the contact off their phone
                 bool answer = await App.Current.MainPage.DisplayAlert("Confirmation","Are you sure you want to delete this contact?","Yes","No");
                 if(answer)
                 {
@@ -127,12 +173,6 @@ namespace PhoneBookApplication.ViewModels
             }
         }
         
-
-        //public async string DisplayAlert()
-        //{
-        //    var answer =  await DisplayAlert("Confirmation", "Are you sure you want to delete this Contact?", "Yes", "No");
-        //    Debug.WriteLine("Answer = " +(answer? "Yes":"No"));
-        //}
 
         //this checks the permissions for accessing photos and sends that image file info as the profile picture for the contact that the user is creating or updating
         public async void OnChooseCommand()
@@ -206,10 +246,13 @@ namespace PhoneBookApplication.ViewModels
 
 
         //enables the ability to edit the details of the page
-        public void OnToggledCommand()
+        public void ToggledEditability()
         {
-            _readOnly = !_readOnly;
-            _isEditable = !_isEditable;
+            if (_isNew == false)
+            {
+                IsEditable = !IsEditable;
+                IsReadable = !IsReadable;
+            }
         }
 
 

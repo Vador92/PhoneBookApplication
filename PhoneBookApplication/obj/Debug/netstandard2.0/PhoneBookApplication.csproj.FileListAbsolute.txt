@@ -1,3 +1,7 @@
+C:\Users\varun\Phonebookfinalapp\PhoneBookApplication\PhoneBookApplication\bin\Debug\netstandard2.0\PhoneBookApplication.deps.json
+C:\Users\varun\Phonebookfinalapp\PhoneBookApplication\PhoneBookApplication\bin\Debug\netstandard2.0\PhoneBookApplication.dll
+C:\Users\varun\Phonebookfinalapp\PhoneBookApplication\PhoneBookApplication\bin\Debug\netstandard2.0\ref\PhoneBookApplication.dll
+C:\Users\varun\Phonebookfinalapp\PhoneBookApplication\PhoneBookApplication\bin\Debug\netstandard2.0\PhoneBookApplication.pdb
 C:\Users\varun\Phonebookfinalapp\PhoneBookApplication\PhoneBookApplication\obj\Debug\netstandard2.0\PhoneBookApplication.csproj.AssemblyReference.cache
 C:\Users\varun\Phonebookfinalapp\PhoneBookApplication\PhoneBookApplication\obj\Debug\netstandard2.0\PhoneBookApplication.GeneratedMSBuildEditorConfig.editorconfig
 C:\Users\varun\Phonebookfinalapp\PhoneBookApplication\PhoneBookApplication\obj\Debug\netstandard2.0\App.xaml.g.cs
@@ -6,10 +10,6 @@ C:\Users\varun\Phonebookfinalapp\PhoneBookApplication\PhoneBookApplication\obj\D
 C:\Users\varun\Phonebookfinalapp\PhoneBookApplication\PhoneBookApplication\obj\Debug\netstandard2.0\PhoneBookApplication.AssemblyInfoInputs.cache
 C:\Users\varun\Phonebookfinalapp\PhoneBookApplication\PhoneBookApplication\obj\Debug\netstandard2.0\PhoneBookApplication.AssemblyInfo.cs
 C:\Users\varun\Phonebookfinalapp\PhoneBookApplication\PhoneBookApplication\obj\Debug\netstandard2.0\PhoneBookApplication.csproj.CoreCompileInputs.cache
-C:\Users\varun\Phonebookfinalapp\PhoneBookApplication\PhoneBookApplication\bin\Debug\netstandard2.0\PhoneBookApplication.deps.json
-C:\Users\varun\Phonebookfinalapp\PhoneBookApplication\PhoneBookApplication\bin\Debug\netstandard2.0\PhoneBookApplication.dll
-C:\Users\varun\Phonebookfinalapp\PhoneBookApplication\PhoneBookApplication\bin\Debug\netstandard2.0\ref\PhoneBookApplication.dll
-C:\Users\varun\Phonebookfinalapp\PhoneBookApplication\PhoneBookApplication\bin\Debug\netstandard2.0\PhoneBookApplication.pdb
 C:\Users\varun\Phonebookfinalapp\PhoneBookApplication\PhoneBookApplication\obj\Debug\netstandard2.0\XamlC.stamp
 C:\Users\varun\Phonebookfinalapp\PhoneBookApplication\PhoneBookApplication\obj\Debug\netstandard2.0\PhoneBookApplication.dll
 C:\Users\varun\Phonebookfinalapp\PhoneBookApplication\PhoneBookApplication\obj\Debug\netstandard2.0\refint\PhoneBookApplication.dll

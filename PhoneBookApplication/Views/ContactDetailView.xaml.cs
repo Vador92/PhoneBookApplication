@@ -21,5 +21,6 @@ namespace PhoneBookApplication.Views
             ViewModelLocator.ContactDetailViewModel.SetContact(contact);
 
         }
+
     }
 }
