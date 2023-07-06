@@ -4,6 +4,7 @@
              xmlns:xct="http://xamarin.com/schemas/2020/toolkit"
              xmlns:converters="clr-namespace:PhoneBookApplication"
              x:Class="PhoneBookApplication.Views.ContactDetailView"
+             xmlns:behaviors="clr-namespace:PhoneBookApplication.Behaviors"
              >
              
 
@@ -11,27 +12,7 @@
         <viewModels:ContactDetailViewModel />
     </ContentPage.BindingContext>
 
-    <ContentPage.Resources>
-        <Style TargetType="Entry">
-            <Setter Property="VisualStateManager.VisualStateGroups">
-                <VisualStateGroupList>
-                    <VisualStateGroup x:Name="CommonStates">
-                        <VisualState x:Name="Normal">
-                            <VisualState.Setters>
-                                <Setter Property="BackgroundColor" Value="Transparent"/>
-                            </VisualState.Setters>
-                        </VisualState>
-                        <VisualState x:Name="Invalid">
-                            <VisualState.Setters>
-                                <Setter Property="BackgroundColor" Value="PaleVioletRed"/>
-                            </VisualState.Setters>
-                        </VisualState>
-                    </VisualStateGroup>
-                </VisualStateGroupList>
-            </Setter>
-                    
-        </Style>
-    </ContentPage.Resources>
+    
     
     
     <ContentPage.ToolbarItems>
@@ -109,6 +90,9 @@
                    Placeholder="John"
                    Grid.Column="1"
                    Margin="10,0,0,0">
+                <Entry.Behaviors>
+                    <behaviors:EntryValidationBehavior/>
+                </Entry.Behaviors>
             </Entry>
         </Grid>
 
@@ -128,7 +112,11 @@
                    TextColor="White"
                    Placeholder="Doe"
                    Grid.Column="1"
-                   Margin="10,0,0,0" />
+                   Margin="10,0,0,0">
+                <Entry.Behaviors>
+                    <behaviors:EntryValidationBehavior/>
+                </Entry.Behaviors>
+            </Entry>
         </Grid>
 
         <Grid Grid.Row="4" Margin="10">
@@ -148,6 +136,9 @@
                    Placeholder="johndoe@example.com"
                    Grid.Column="1"
                    Margin="10,0,0,0">
+                <Entry.Behaviors>
+                    <behaviors:EntryValidationBehavior/>
+                </Entry.Behaviors>
             </Entry>
              
         </Grid>
@@ -168,7 +159,11 @@
                    IsReadOnly="{Binding IsReadable}"
                    Placeholder="123 Main St"
                    Grid.Column="1"
-                   Margin="10,0,0,0" />
+                   Margin="10,0,0,0">
+                <Entry.Behaviors>
+                    <behaviors:EntryValidationBehavior/>
+                </Entry.Behaviors>
+            </Entry>
         </Grid>
 
         <Button Text="Update Contact"

@@ -14,6 +14,7 @@ namespace PhoneBookApplication.Views
 	[XamlCompilation(XamlCompilationOptions.Compile)]
 	public partial class ContactDetailView : ContentPage
 	{
+        //initalizes the binding context and connecting the viewmodel
 		public ContactDetailView(Contact contact = null)
 		{
 			InitializeComponent ();
@@ -22,6 +23,8 @@ namespace PhoneBookApplication.Views
 
         }
 		
+
+        //in the works
 		public void Handle_TextChanged(object sender, TextChangedEventArgs e)
 		{
 			if (string.IsNullOrWhiteSpace(FirstNameEntry.Text))
