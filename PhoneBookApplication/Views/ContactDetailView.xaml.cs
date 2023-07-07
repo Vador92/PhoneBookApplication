@@ -25,9 +25,7 @@ namespace PhoneBookApplication.Views
 
         private void Validate(object sender, EventArgs e)
         {
-            if (!IsEnabled)
-                return;
-
+            
             EntryValidation behavior = new EntryValidation();
             behavior.Entries = new List<Entry> { FirstNameEntry, LastNameEntry, EmailEntry, AddressEntry };
             behavior.AttachEntries();
