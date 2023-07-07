@@ -18,6 +18,7 @@ using System.IO;
 using System.Collections.Specialized;
 using System.Diagnostics;
 using Xamarin.CommunityToolkit.Converters;
+using PhoneBookApplication.Behaviors;
 
 namespace PhoneBookApplication.ViewModels
 {
@@ -45,6 +46,16 @@ namespace PhoneBookApplication.ViewModels
                 OnPropertyChanged(nameof(IsEditable));
             }
         }
+
+        //making sure entry is valid
+        private bool _isEntryValid = true;
+        public bool IsEntryValid
+        {
+            get { return _isEntryValid; }
+            set { SetProperty(ref _isEntryValid, value); }
+        }
+
+
 
 
         //initalizes the entries on the detailpage where they are only to be able to be read until the user clicks edit contact
@@ -80,7 +91,6 @@ namespace PhoneBookApplication.ViewModels
                 _isNew = true;
             }
         }
-
         //used as a means of determining whether we save or create using the database commands
         private bool _isNew = false;
 
@@ -99,7 +109,6 @@ namespace PhoneBookApplication.ViewModels
         public ICommand ToggledReadCommand { get; private set; }
         public ICommand TakeCommand { get; set; }
 
-
         //initalizes the commands, providing functionality between the front and backend
         public ContactDetailViewModel()
         {
@@ -115,12 +124,13 @@ namespace PhoneBookApplication.ViewModels
 
       
         //if contact is new, we save (create it) in the database, else we update the existing contact in the database, and then we pop the page (move back to overview)
-        private async void OnUpdateCommand()
+        public async void OnUpdateCommand()
         {
-            var valid = OnValidateCommand();
+            
+            OnValidateCommand();
             if (_isNew)
             {
-                if(valid)
+                if(IsEntryValid)
                 {
                     Contact.Id = Guid.NewGuid();
                     if (Contact.ProfilePicture == null)
@@ -135,30 +145,23 @@ namespace PhoneBookApplication.ViewModels
             }
             else
             {
-                if (valid)
+                if (IsEntryValid)
                 {
                     await App.Database.UpdateContactAsync(Contact);
                     await App.Current.MainPage.Navigation.PopAsync();
                 }
-            }            
-
+            }
         }
 
 
+
         //condenses the checking for if the new contact or existing contact houses valid entries
-        public bool OnValidateCommand()
+        public void OnValidateCommand()
         {
-            if (!string.IsNullOrWhiteSpace(Contact.FirstName)
+            IsEntryValid = !string.IsNullOrWhiteSpace(Contact.FirstName)
                     && !string.IsNullOrWhiteSpace(Contact.LastName)
                     && !string.IsNullOrWhiteSpace(Contact.Email)
-                    && !string.IsNullOrWhiteSpace(Contact.Address))
-            {
-                return true;
-            }
-            else
-            {
-                return false;
-            }
+                    && !string.IsNullOrWhiteSpace(Contact.Address);
         }
 
 
@@ -176,8 +179,6 @@ namespace PhoneBookApplication.ViewModels
                 }
             }
         }
-        
-
         //this checks the permissions for accessing photos and sends that image file info as the profile picture for the contact that the user is creating or updating
         public async void OnChooseCommand()
         {
@@ -211,8 +212,6 @@ namespace PhoneBookApplication.ViewModels
                 Console.WriteLine($"Error selecting photo: {ex.Message}");
             }
         }
-
-
         //checks camera permissions and then allows that picture that was taken to be used as the contact profile picture
         public async void OnTakeCommand()
         {
@@ -246,9 +245,6 @@ namespace PhoneBookApplication.ViewModels
                 Console.WriteLine($"Error capturing photo: {ex.Message}");
             }
         }
-
-
-
         //enables the ability to edit the details of the page
         public void ToggledEditability()
         {
@@ -258,8 +254,5 @@ namespace PhoneBookApplication.ViewModels
                 IsReadable = !IsReadable;
             }
         }
-
-
-
     }
 }

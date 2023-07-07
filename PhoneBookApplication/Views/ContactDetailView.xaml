@@ -13,8 +13,6 @@
     </ContentPage.BindingContext>
 
     
-    
-    
     <ContentPage.ToolbarItems>
         <ToolbarItem Text="Edit Contact" Command="{Binding ToggledEditCommand}" />
     </ContentPage.ToolbarItems>
@@ -90,10 +88,8 @@
                    Placeholder="John"
                    Grid.Column="1"
                    Margin="10,0,0,0">
-                <Entry.Behaviors>
-                    <behaviors:EntryValidationBehavior/>
-                </Entry.Behaviors>
             </Entry>
+
         </Grid>
 
         <Grid Grid.Row="3" Margin="10">
@@ -113,9 +109,7 @@
                    Placeholder="Doe"
                    Grid.Column="1"
                    Margin="10,0,0,0">
-                <Entry.Behaviors>
-                    <behaviors:EntryValidationBehavior/>
-                </Entry.Behaviors>
+                
             </Entry>
         </Grid>
 
@@ -136,9 +130,7 @@
                    Placeholder="johndoe@example.com"
                    Grid.Column="1"
                    Margin="10,0,0,0">
-                <Entry.Behaviors>
-                    <behaviors:EntryValidationBehavior/>
-                </Entry.Behaviors>
+                
             </Entry>
              
         </Grid>
@@ -160,15 +152,14 @@
                    Placeholder="123 Main St"
                    Grid.Column="1"
                    Margin="10,0,0,0">
-                <Entry.Behaviors>
-                    <behaviors:EntryValidationBehavior/>
-                </Entry.Behaviors>
+                
             </Entry>
         </Grid>
 
         <Button Text="Update Contact"
                 BackgroundColor="LightGreen"
                 Command="{Binding UpdateCommand}"
+                Clicked="Validate"
                 IsVisible="{Binding IsEditable}"
                 Grid.Row="6"
                 Margin="10,0,10,10" />
